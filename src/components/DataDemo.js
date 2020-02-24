@@ -247,7 +247,9 @@ export class DataDemo extends Component {
                     name="price" />
                 </label>
                 <label for="date"><div style={{ textAlign: "center" }} >Date</div>
-                  <InputText
+                  <InputMask
+                    mask="9999-99-99"
+                    slotChar="yyyy-mm-dd"
                     style={{ width: "100px", marginRight: "10px" }}
                     value={this.state.eventInfo.date}
                     onChange={this.changeHandler}

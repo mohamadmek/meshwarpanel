@@ -11,6 +11,7 @@ export class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
+      sumRegistrations: "",
       countRegistrations: "",
       tasks: [],
       city: null,
@@ -42,7 +43,7 @@ export class Dashboard extends Component {
       },
       fullcalendarOptions: {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        defaultDate: "2017-02-01",
+        defaultDate: "2020-02-01",
         header: {
           left: "prev,next today",
           center: "title",
@@ -50,72 +51,7 @@ export class Dashboard extends Component {
         },
         editable: true
       },
-      events: [
-        {
-          id: 1,
-          title: "All Day Event",
-          start: "2017-02-01"
-        },
-        {
-          id: 2,
-          title: "Long Event",
-          start: "2017-02-07",
-          end: "2017-02-10"
-        },
-        {
-          id: 3,
-          title: "Repeating Event",
-          start: "2017-02-09T16:00:00"
-        },
-        {
-          id: 4,
-          title: "Repeating Event",
-          start: "2017-02-16T16:00:00"
-        },
-        {
-          id: 5,
-          title: "Conference",
-          start: "2017-02-11",
-          end: "2017-02-13"
-        },
-        {
-          id: 6,
-          title: "Meeting",
-          start: "2017-02-12T10:30:00",
-          end: "2017-02-12T12:30:00"
-        },
-        {
-          id: 7,
-          title: "Lunch",
-          start: "2017-02-12T12:00:00"
-        },
-        {
-          id: 8,
-          title: "Meeting",
-          start: "2017-02-12T14:30:00"
-        },
-        {
-          id: 9,
-          title: "Happy Hour",
-          start: "2017-02-12T17:30:00"
-        },
-        {
-          id: 10,
-          title: "Dinner",
-          start: "2017-02-12T20:00:00"
-        },
-        {
-          id: 11,
-          title: "Birthday Party",
-          start: "2017-02-13T07:00:00"
-        },
-        {
-          id: 12,
-          title: "Click for Google",
-          url: "http://google.com/",
-          start: "2017-02-28"
-        }
-      ]
+      events: []
     };
 
     this.onTaskChange = this.onTaskChange.bind(this);
@@ -137,12 +73,30 @@ export class Dashboard extends Component {
 
   getCountRegisrations = async () => {
     const response = await fetch("http://localhost:8080/countreg");
-    let result = await response.json()
+    const result = await response.json()
     this.setState({ countRegistrations: result.result[0].reg });
   };
 
+  getSumRegisrations = async () => {
+    const response = await fetch("http://localhost:8080/sumreg");
+    const result = await response.json()
+    this.setState({ sumRegistrations: result.result[0].reg });
+  };
+
+  getEvents = async () => {
+    const response = await fetch('http://localhost:8080/events')
+    const result = await response.json()
+      this.setState({events: result.result.map(event => {
+        return {title : event.title, start: event.date}
+      })})
+    
+      //this.setState({events: [{title: result.result[0].title, date: result.result[0].date}]})
+  }
+
   componentDidMount = async () => {
     this.getCountRegisrations();
+    this.getSumRegisrations();
+     this.getEvents();
   };
 
   render() {
@@ -168,7 +122,7 @@ export class Dashboard extends Component {
           <div className="card summary">
             <span className="title">Revenue</span>
             <span className="detail">Total Income</span>
-            <span className="count revenue">$3,200</span>
+    <span className="count revenue">{this.state.sumRegistrations}$</span>
           </div>
         </div>
 

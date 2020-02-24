@@ -23,11 +23,7 @@ export class AppProfile extends Component {
                     <img src="assets/layout/images/profile.png" alt="" />
                 </div>
                 <button className="p-link layout-profile-link" onClick={this.onClick}>
-<<<<<<< HEAD
-                    <span className="username">Claire Williams</span>
-=======
                     <span className="username">Maguy Swiss</span>
->>>>>>> f0fd67c3675dc702acf7497714efb5d1373857bb
                     <i className="pi pi-fw pi-cog"/>
                 </button>
                 <ul className={classNames({'layout-profile-expanded': this.state.expanded})}>

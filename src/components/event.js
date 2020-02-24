@@ -39,6 +39,7 @@ class event extends Component {
           <img
             style={{ width: "200px" }}
             src={`http://localhost:8080/images/${this.props.data.image_src}`}
+            alt="image"
           />
         </div>
 
@@ -137,7 +138,6 @@ class event extends Component {
             icon="pi pi-cog"
             onClick={this.toggleMode}
             style={{ marginTop: "10px" }}
-
           ></Button>
         </div>
       </div>

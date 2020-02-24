@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
-import { CarService } from '../service/CarService';
-import { NodeService } from '../service/NodeService';
-import { EventService } from '../service/EventService';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
-import { Panel } from 'primereact/panel';
-import Event from './event'
+import React, { Component } from "react";
+import { CarService } from "../service/CarService";
+import { NodeService } from "../service/NodeService";
+import { EventService } from "../service/EventService";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+import { DataView, DataViewLayoutOptions } from "primereact/dataview";
+import { Panel } from "primereact/panel";
+import Event from "./event";
+import {InputMask} from 'primereact/inputmask';
 export class DataDemo extends Component {
-
   constructor() {
     super();
     this.state = {
-
+      rows: 3,
+      first: 0,
       dataViewValue: [],
       selectedFile: null,
       selectedFiles: null,
@@ -36,14 +37,12 @@ export class DataDemo extends Component {
       },
       error: "",
       searchInput: ""
-
     };
 
     this.carService = new CarService();
     this.nodeService = new NodeService();
     this.eventService = new EventService();
     this.dataViewItemTemplate = this.dataViewItemTemplate.bind(this);
-
   }
 
   updateEvent = async (e, id, props) => {

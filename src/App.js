@@ -18,6 +18,7 @@ import {ChartsDemo} from './components/ChartsDemo';
 import {MiscDemo} from './components/MiscDemo';
 import {EmptyPage} from './components/EmptyPage';
 import {Documentation} from "./components/Documentation";
+import Gallery from "./components/Gallery"
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -163,6 +164,10 @@ class App extends Component {
             //         }
             //     ]
             // },
+            ,
+            {   
+                label: 'Gallery', icon: 'pi pi-fw pi-star', command: () => {window.location = '#/gallery'},
+            }
         ];
     }
 
@@ -232,6 +237,7 @@ class App extends Component {
                     <Route path="/charts" component={ChartsDemo} />
                     <Route path="/misc" component={MiscDemo} />
                     <Route path="/empty" component={EmptyPage} />
+                    <Route path="/gallery" component={Gallery} />
                 </div>
 
                 <AppFooter />

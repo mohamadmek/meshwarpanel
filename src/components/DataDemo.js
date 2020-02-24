@@ -60,7 +60,6 @@ export class DataDemo extends Component {
       Object.keys(props).forEach(prop => {
         if (props[prop] !== "" && prop !== "event_id") {
           event[prop] = props[prop];
-          console.log(prop, props[prop]);
           body.append(prop, props[prop]);
         }
       });
@@ -70,7 +69,6 @@ export class DataDemo extends Component {
         body: body
       });
       const result = await response.json();
-      console.log(result);
 
       events[index] = event;
       this.setState({ events });
@@ -107,13 +105,11 @@ export class DataDemo extends Component {
     //   .then(nodes => this.setState({ treeData2: nodes }));
     const response = await fetch("http://localhost:8080/events");
     const event = await response.json();
-    console.log(event.result);
     this.setState({ dataViewValue: event.result });
   }
   getEvents = async () => {
     const response = await fetch("http://localhost:8080/events");
     const event = await response.json();
-    console.log(event.result);
     this.setState({ dataViewValue: event.result });
   };
 
@@ -177,7 +173,6 @@ export class DataDemo extends Component {
   handleCreate = async e => {
     e.preventDefault();
     const file = e.target.image.files[0];
-    console.log(file);
     const body = new FormData();
     body.append("image", file);
     body.append("location", this.state.eventInfo.location);

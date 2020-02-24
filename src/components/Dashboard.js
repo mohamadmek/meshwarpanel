@@ -11,6 +11,7 @@ export class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
+      countRegistrations: "",
       tasks: [],
       city: null,
       selectedCar: null,
@@ -134,9 +135,15 @@ export class Dashboard extends Component {
     this.setState({ city: e.value });
   }
 
-  componentDidMount() {
-    this.carservice.getCarsSmall().then(data => this.setState({ cars: data }));
-  }
+  getCountRegisrations = async () => {
+    const response = await fetch("http://localhost:8080/countreg");
+    let result = await response.json()
+    this.setState({ countRegistrations: result.result[0].reg });
+  };
+
+  componentDidMount = async () => {
+    this.getCountRegisrations();
+  };
 
   render() {
     return (
@@ -152,7 +159,9 @@ export class Dashboard extends Component {
           <div className="card summary">
             <span className="title">Registrations</span>
             <span className="detail">Number of Registrations</span>
-            <span className="count purchases">534</span>
+            <span className="count purchases">
+            {this.state.countRegistrations}
+            </span>
           </div>
         </div>
         <div className="p-col-12 p-lg-4">

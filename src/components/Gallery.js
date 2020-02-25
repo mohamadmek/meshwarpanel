@@ -12,9 +12,7 @@ class Gallery extends Component {
   }
 
   componentDidMount = async () => {
-    const response = await fetch("http://localhost:8080/gallery");
-    const image = await response.json();
-    this.setState({ gallery: image.result });
+    this.getImages();
   };
 
   // changeHandler = (e) => {
@@ -25,9 +23,15 @@ class Gallery extends Component {
 
 
   getImages = async () => {
-    const response = await fetch("http://localhost:8080/gallery");
-    const image = await response.json();
-    this.setState({ gallery: image.result });
+    try {
+      const response = await fetch("http://localhost:8080/gallery");
+      const image = await response.json();
+      if(image.result.length > 0){
+        this.setState({ gallery: image.result });
+      }
+    } catch (err) {
+      console.log(err.message)
+    }
   };
 
   addImage = async e => {
@@ -35,19 +39,19 @@ class Gallery extends Component {
     const file = e.target.image.files[0]
     const body = new FormData();
     body.append("image", file);
-    try{
+    try {
       const response = await fetch("http://localhost:8080/upload", {
         method: "POST",
         body: body
       });
       const result = await response.json();
       this.getImages();
-    }catch(err){
+    } catch (err) {
       throw new Error(err)
     }
-     
-    
-     
+
+
+
   };
 
   deleteImage = async id => {
@@ -77,7 +81,7 @@ class Gallery extends Component {
             name="image"
             type="file"
             style={{ marginBottom: "20px" }}
-            // onChange={this.changeHandler}
+          // onChange={this.changeHandler}
           />
           <Button label="Create" style={{ padding: "5px 0" }} />
         </form>

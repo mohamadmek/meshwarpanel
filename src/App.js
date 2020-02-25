@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Auth from './components/Auth';
 import Registrations from './components/Registrations';
 import classNames from 'classnames';
 import {AppTopbar} from './AppTopbar';
@@ -238,6 +239,7 @@ class App extends Component {
                     <Route path="/misc" component={MiscDemo} />
                     <Route path="/empty" component={EmptyPage} />
                     <Route path="/gallery" component={Gallery} />
+                    <Route path="/auth" component={Auth} />
                 </div>
 
                 <AppFooter />

@@ -12,7 +12,11 @@ class Gallery extends Component {
   }
 
   componentDidMount = async () => {
-    this.getImages();
+    if(localStorage.getItem('login')){
+      this.getImages();
+    }else{
+      this.props.history.push('/');
+    }
   };
 
   // changeHandler = (e) => {

@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 import {InputText} from 'primereact/inputtext';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 
 export class AppTopbar extends Component {
+    constructor(){
+        super();
+        this.state = {
+
+        }
+    }
 
     static defaultProps = {
         onToggleMenu: null
@@ -10,6 +17,11 @@ export class AppTopbar extends Component {
 
     static propTypes = {
         onToggleMenu: PropTypes.func.isRequired
+    }
+
+    logout = () => {
+        localStorage.clear();
+        this.props.history.push('/');
     }
 
     render() {
@@ -36,6 +48,7 @@ export class AppTopbar extends Component {
                         <span className="layout-topbar-item-text">User</span>
                         <span className="layout-topbar-icon pi pi-user"/>
                     </button>
+                    <button onClick={this.logout}>Logout</button>
                 </div>
             </div>
         );

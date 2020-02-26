@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Auth from './components/Auth';
+import Logout from './components/Logout';
 import Registrations from './components/Registrations';
 import classNames from 'classnames';
 import {AppTopbar} from './AppTopbar';
 import {AppFooter} from './AppFooter';
 import {AppMenu} from './AppMenu';
 import {AppProfile} from './AppProfile';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import {Dashboard} from './components/Dashboard';
 import {FormsDemo} from './components/FormsDemo';
 import {SampleDemo} from './components/SampleDemo';
@@ -98,6 +99,8 @@ class App extends Component {
         }
     }
 
+    
+
     createMenu() {
         this.menu = [
             {label: 'Dashboard', icon: 'pi pi-fw pi-home', command: () => {window.location = '#/'}},
@@ -168,6 +171,9 @@ class App extends Component {
             ,
             {   
                 label: 'Gallery', icon: 'pi pi-fw pi-star', command: () => {window.location = '#/gallery'},
+            },
+            {
+                label: 'Logout', icon: 'pi pi-fw pi-quit', command: () => {window.location = '#/logout'}
             }
         ];
     }
@@ -197,6 +203,7 @@ class App extends Component {
             this.removeClass(document.body, 'body-overflow-hidden');
     }
 
+
     render() {
         const logo = this.state.layoutColorMode === 'dark' ? 'assets/layout/images/logo-white.svg': 'assets/layout/images/logo.svg';
 
@@ -215,18 +222,19 @@ class App extends Component {
 
         return (
             <div className={wrapperClass} onClick={this.onWrapperClick}>
-                <AppTopbar onToggleMenu={this.onToggleMenu}/>
+                <AppTopbar onToggleMenu={this.onToggleMenu} {...this.props}/>
 
                 <div ref={(el) => this.sidebar = el} className={sidebarClassName} onClick={this.onSidebarClick}>
                     <div className="layout-logo" style={{color: "#fff"}}>
                        <h1>Meshwar</h1>
                     </div>
-                    <AppProfile />
+                    <AppProfile {...this.props}/>
                     <AppMenu model={this.menu} onMenuItemClick={this.onMenuItemClick} />
                 </div>
 
                 <div className="layout-main">
-                    <Route path="/" exact component={Dashboard} />
+                    <Route path="/" exact component={Auth} />
+                    <Route path="/dashboard" exact component={Dashboard} />
                     <Route path="/forms" component={FormsDemo} />
                     <Route path="/sample" component={SampleDemo} />
                     <Route path="/data" component={DataDemo} />
@@ -239,7 +247,7 @@ class App extends Component {
                     <Route path="/misc" component={MiscDemo} />
                     <Route path="/empty" component={EmptyPage} />
                     <Route path="/gallery" component={Gallery} />
-                    <Route path="/auth" component={Auth} />
+                    <Route path="/logout" component={Logout} />
                 </div>
 
                 <AppFooter />
@@ -250,4 +258,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withRouter(App);

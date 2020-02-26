@@ -28,7 +28,7 @@ class Auth extends Component {
             console.log(result)
             if(result.success){
                 this.setState({error:"", login:true})
-                this.props.history.push('/');
+                this.props.history.push('/dashboard');
             }else {
                 this.setState({error:"Login failed", login:false})
             }

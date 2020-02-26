@@ -86,18 +86,25 @@ export class Dashboard extends Component {
   getEvents = async () => {
     const response = await fetch('http://localhost:8080/events')
     const result = await response.json()
-      this.setState({events: result.result.map(event => {
-        return {title : event.title, start: event.date}
-      })})
-    
-      //this.setState({events: [{title: result.result[0].title, date: result.result[0].date}]})
+    this.setState({
+      events: result.result.map(event => {
+        return { title: event.title, start: event.date }
+      })
+    })
+
+    //this.setState({events: [{title: result.result[0].title, date: result.result[0].date}]})
   }
 
-  componentDidMount = async () => {
-    this.getCountRegisrations();
-    this.getSumRegisrations();
-     this.getEvents();
-  };
+
+  async componentDidMount() {
+    if (localStorage.getItem('login')) {
+      this.getCountRegisrations();
+      this.getSumRegisrations();
+      this.getEvents();
+    } else {
+      this.props.history.push('/')
+    }
+  }
 
   render() {
     return (
@@ -114,7 +121,7 @@ export class Dashboard extends Component {
             <span className="title">Registrations</span>
             <span className="detail">Number of Registrations</span>
             <span className="count purchases">
-            {this.state.countRegistrations}
+              {this.state.countRegistrations}
             </span>
           </div>
         </div>
@@ -122,7 +129,7 @@ export class Dashboard extends Component {
           <div className="card summary">
             <span className="title">Revenue</span>
             <span className="detail">Total Income</span>
-    <span className="count revenue">{this.state.sumRegistrations}$</span>
+            <span className="count revenue">{this.state.sumRegistrations}$</span>
           </div>
         </div>
 

@@ -38,7 +38,11 @@ class Registrations extends Component {
     }
 
     async componentDidMount() {
-        this.getRegistrations();
+        if(localStorage.getItem('login')){
+            this.getRegistrations();
+        } else {
+            this.props.history.push('/')
+        }
     }
 
     render() {

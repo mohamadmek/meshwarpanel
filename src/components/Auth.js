@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Auth.css'
 
 class Auth extends Component {
     constructor(props) {
@@ -40,25 +41,16 @@ class Auth extends Component {
 
     render() {
         return (
-            <div style={{
-                color: "#fff",
-                background: "dodgerblue",
-                display: "grid",
-                padding: "20px",
-                gridGap: "10px",
-                width: "70%",
-                margin: "0 auto",
-                textAlign: "center",
-                borderRadius: "7px"
-            }}>
+            <div className="login-wrapper">
+                <div className="middle">
                 {!this.state.login && this.state.error &&<div>Incorrect username or password</div>}
                 <form onSubmit={(e) => this.onClickHandler(e)}>
-                    <h2>Login to <span style={{ fontWeight: "bolder" }}>Admin Panel</span></h2>
-                    <input type="email" onChange={(e) => { this.setState({ email: e.target.value }) }} name="email" id="email" />
-                    <input type="password" name="password" id="password" onChange={(e) => { this.setState({ password: e.target.value }) }} />
-                    <button>Login</button>
+                    <h1 style={{marginBottom:"10px"}}>Login to <span style={{ fontWeight: "bolder", color:"#fff" }}>Admin Panel</span></h1>
+                    <div> <input type="email" onChange={(e) => { this.setState({ email: e.target.value }) }} name="email" id="email" /></div>
+                    <div style={{marginTop:"10px"}}><input type="password" name="password" id="password" onChange={(e) => { this.setState({ password: e.target.value }) }} /></div>
+                    <button className="login-button">Login</button>
                 </form>
-
+                </div>
             </div>
 
         )

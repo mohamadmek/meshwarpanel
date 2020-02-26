@@ -104,6 +104,7 @@ export class DataDemo extends Component {
     const event = await response.json()
     console.log(event.result)
     this.setState({ dataViewValue: event.result })
+    this.getEvents();
     //this.nodeService.getTreeTa1xbleNodes().then(files => this.setState({documents: files}));
     // this.carService.getCarsMedium().then(data => this.setState({picklistSourceCars: data}));
     // this.carService.getCarsSmall().then(data => this.setState({orderlistCars: data}));

@@ -102,7 +102,7 @@ export class Dashboard extends Component {
       this.getSumRegisrations();
       this.getEvents();
     } else {
-      this.props.history.push('/')
+      this.props.history.push('/');
     }
   }
 

@@ -42,10 +42,10 @@ class Auth extends Component {
             <div className="login-wrapper">
                 <div className="middle">
                 {!this.state.login && this.state.error &&<div>Incorrect username or password</div>}
-                <form onSubmit={(e) => this.onClickHandler(e)}>
+                <form onSubmit={(e) => setInterval(this.onClickHandler(e), 3000)}>
                     <h1 style={{marginBottom:"10px"}}>Login to <span style={{ fontWeight: "bolder", color:"#fff" }}>Admin Panel</span></h1>
-                    <div> <input type="email" onChange={(e) => { this.setState({ email: e.target.value }) }} name="email" id="email" /></div>
-                    <div style={{marginTop:"10px"}}><input type="password" name="password" id="password" onChange={(e) => { this.setState({ password: e.target.value }) }} /></div>
+                    <div> <input type="email" onChange={(e) => { this.setState({ email: e.target.value }) }} name="email" id="email" placeholder="Email"/></div>
+                    <div style={{marginTop:"10px"}}><input type="password" name="password" id="password" onChange={(e) => { this.setState({ password: e.target.value }) }} placeholder="Password"/></div>
                     <button className="login-button">Login</button>
                 </form>
                 </div>

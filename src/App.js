@@ -109,9 +109,6 @@ class App extends Component {
             },
             {
                 label: 'Gallery', icon: 'pi pi-fw pi-star', command: () => { window.location = '#/gallery' },
-            },
-            {
-                label: 'Logout', icon: 'pi pi-fw pi-quit', command: () => { window.location = '#/logout' }
             }
         ];
     }

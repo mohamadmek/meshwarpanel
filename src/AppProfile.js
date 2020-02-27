@@ -18,7 +18,7 @@ export class AppProfile extends Component {
 
     clickHandler = () => {
         localStorage.clear();
-        this.props.history.push('/logout');
+        this.props.history.push('/');
     }
 
     render() {

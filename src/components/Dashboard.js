@@ -18,27 +18,27 @@ export class Dashboard extends Component {
       selectedCar: null,
       lineData: {
         labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
+          // "January",
+          // "February",
+          // "March",
+          // "April",
+          // "May",
+          // "June",
+          // "July"
         ],
         datasets: [
           {
-            label: "First Dataset",
-            data: [65, 59, 80, 81, 56, 55, 40],
+            label: "Revenue Per Event",
+            data: [],
             fill: false,
             borderColor: "#007be5"
-          },
-          {
-            label: "Second Dataset",
-            data: [28, 48, 40, 19, 86, 27, 90],
-            fill: false,
-            borderColor: "#20d077"
           }
+          // {
+          //   label: "Second Dataset",
+          //   data: [28, 48, 40, 19, 86, 27, 90],
+          //   fill: false,
+          //   borderColor: "#20d077"
+          // }
         ]
       },
       fullcalendarOptions: {
@@ -89,9 +89,23 @@ export class Dashboard extends Component {
     this.setState({
       events: result.result.map(event => {
         return { title: event.title, start: event.date }
-      })
+      }),
+      lineData: {
+        labels: result.data.map(e => {
+          return e.title;
+        }),
+      datasets: [
+        {
+          label: "Income Per Event (In $)",
+          data: result.data.map(e => {
+            return e.sum;
+          }),
+          borderColor: "dodgerblue"
+        }
+      ]
+      }
     })
-
+    console.log(result)
     //this.setState({events: [{title: result.result[0].title, date: result.result[0].date}]})
   }
 

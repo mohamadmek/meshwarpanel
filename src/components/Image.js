@@ -11,7 +11,7 @@ function Image(props) {
       />
       
        <img 
-       src={`http://localhost:8080/images/${props.image.name}`} 
+       src={`/images/${props.image.name}`} 
        style={{width: "300px", height: "300px"}}>
        </img>
     </div>

@@ -28,7 +28,7 @@ class Gallery extends Component {
 
   getImages = async () => {
     try {
-      const response = await fetch("http://localhost:8080/gallery");
+      const response = await fetch("/gallery");
       const image = await response.json();
       if(image.result.length > 0){
         this.setState({ gallery: image.result });
@@ -44,7 +44,7 @@ class Gallery extends Component {
     const body = new FormData();
     body.append("image", file);
     try {
-      const response = await fetch("http://localhost:8080/upload", {
+      const response = await fetch("/upload", {
         method: "POST",
         body: body
       });

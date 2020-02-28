@@ -38,7 +38,7 @@ class event extends Component {
         <div className="p-col-12 p-md-3">
           <img
             style={{ width: "200px" }}
-            src={`http://localhost:8080/images/${this.props.data.image_src}`}
+            src={`/images/${this.props.data.image_src}`}
             alt="image"
           />
         </div>
@@ -97,7 +97,7 @@ class event extends Component {
         <div className="p-col-12 p-md-3">
           <img
             style={{ width: "200px" }}
-            src={`http://localhost:8080/images/${this.props.data.image_src}`}
+            src={`/images/${this.props.data.image_src}`}
             alt="image"
           />
         </div>

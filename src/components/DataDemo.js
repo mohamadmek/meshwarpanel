@@ -67,7 +67,7 @@ export class DataDemo extends Component {
       });
 
 
-      const response = await fetch(`http://localhost:8080/events/${id}`, { method: `PUT`, body: body });
+      const response = await fetch(`/events/${id}`, { method: `PUT`, body: body });
       const result = await response.json();
       events[index] = event;
       this.setState({ events });
@@ -81,7 +81,7 @@ export class DataDemo extends Component {
 
   deleteEvent = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/events/${id}`, { method: "DELETE" })
+      const response = await fetch(`/events/${id}`, { method: "DELETE" })
       const result = await response.json()
       console.log(result);
       if (result.success) {
@@ -100,7 +100,7 @@ export class DataDemo extends Component {
     this.nodeService.getTreeNodes(this).then(nodes => this.setState({ treeData1: nodes }));
     this.nodeService.getTreeNodes(this).then(nodes => this.setState({ treeData2: nodes }));
     //this.carService.getCarsLarge().then(data => this.setState({dataViewValue: data}));
-    const response = await fetch('http://localhost:8080/events')
+    const response = await fetch('/events')
     const event = await response.json()
     console.log(event.result)
     this.setState({ dataViewValue: event.result })
@@ -111,7 +111,7 @@ export class DataDemo extends Component {
     // this.eventService.getEvents().then(events => this.setState({fullCalendarEvents: events}));
   }
   getEvents = async () => {
-    const response = await fetch('http://localhost:8080/events')
+    const response = await fetch('/events')
     const event = await response.json()
     console.log(event.result)
     this.setState({ dataViewValue: event.result })
@@ -179,7 +179,7 @@ export class DataDemo extends Component {
     body.append('price', parseInt(this.state.eventInfo.price));
     body.append('remaining_seats', parseInt(this.state.eventInfo.seats));
     body.append('description', this.state.eventInfo.description);
-    const response = await fetch('http://localhost:8080/events', {
+    const response = await fetch('/events', {
       method: 'POST',
       body: body
     })

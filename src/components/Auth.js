@@ -18,7 +18,7 @@ class Auth extends Component {
             const body = new FormData();
             body.append('email', this.state.email);
             body.append('password', this.state.password);
-            const response = await fetch('http://localhost:8080/api/user/login', {
+            const response = await fetch('/api/user/login', {
                 method: `POST`,
                 body: body
             });

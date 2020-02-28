@@ -72,19 +72,19 @@ export class Dashboard extends Component {
   }
 
   getCountRegisrations = async () => {
-    const response = await fetch("http://localhost:8080/countreg");
+    const response = await fetch("/countreg");
     const result = await response.json()
     this.setState({ countRegistrations: result.result[0].reg });
   };
 
   getSumRegisrations = async () => {
-    const response = await fetch("http://localhost:8080/sumreg");
+    const response = await fetch("/sumreg");
     const result = await response.json()
     this.setState({ sumRegistrations: result.result[0].reg });
   };
 
   getEvents = async () => {
-    const response = await fetch('http://localhost:8080/events')
+    const response = await fetch('/events')
     const result = await response.json()
     this.setState({
       events: result.result.map(event => {

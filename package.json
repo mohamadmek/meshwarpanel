@@ -3,7 +3,6 @@
     "version": "3.0.1-SNAPSHOT",
     "homepage": "/sigma-react",
     "private": false,
-    "proxy": "https://mechwar.herokuapp.com/",
     "repository": {
         "type": "git",
         "url": "https://github.com/primefaces/sigma.git"

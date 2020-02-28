@@ -6,11 +6,14 @@ import { FullCalendar } from "primereact/fullcalendar";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import {ScrollPanel} from 'primereact/scrollpanel';
 
 export class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
+      countEvents: "",
+      registrations: [],
       sumRegistrations: "",
       countRegistrations: "",
       tasks: [],
@@ -71,20 +74,33 @@ export class Dashboard extends Component {
     this.setState({ city: e.value });
   }
 
+  getRegistrations = async () => {
+    const response = await fetch('http://localhost:8080/registrations');
+    const result = await response.json();
+    this.setState({ registrations: result.result });
+}
+
   getCountRegisrations = async () => {
-    const response = await fetch("/countreg");
+    const response = await fetch("http://localhost:8080/countreg");
     const result = await response.json()
     this.setState({ countRegistrations: result.result[0].reg });
   };
 
   getSumRegisrations = async () => {
-    const response = await fetch("/sumreg");
+    const response = await fetch("http://localhost:8080/sumreg");
     const result = await response.json()
     this.setState({ sumRegistrations: result.result[0].reg });
   };
 
+  getCountEvents = async () => {
+    const response = await fetch("http://localhost:8080/countevents");
+    const result = await response.json()
+    console.log(result)
+    this.setState({ countEvents: result.result[0].count});
+  }
+
   getEvents = async () => {
-    const response = await fetch('/events')
+    const response = await fetch('http://localhost:8080/events')
     const result = await response.json()
     this.setState({
       events: result.result.map(event => {
@@ -115,6 +131,8 @@ export class Dashboard extends Component {
       this.getCountRegisrations();
       this.getSumRegisrations();
       this.getEvents();
+      this.getRegistrations();
+      this.getCountEvents();
     } else {
       this.props.history.push('/');
     }
@@ -125,9 +143,9 @@ export class Dashboard extends Component {
       <div className="p-grid p-fluid dashboard">
         <div className="p-col-12 p-lg-4">
           <div className="card summary">
-            <span className="title">Users</span>
-            <span className="detail">Number of visitors</span>
-            <span className="count visitors">12</span>
+            <span className="title">Events</span>
+            <span className="detail">Number of Events</span>
+      <span className="count visitors">{this.state.countEvents}</span>
           </div>
         </div>
         <div className="p-col-12 p-lg-4">
@@ -148,8 +166,11 @@ export class Dashboard extends Component {
         </div>
 
         <div className="p-col-12 p-lg-4 contacts">
-          <Panel header="Contacts">
-            <ul>
+          <div style={{fontWeight:"bold", fontSize:"1.3em"}}>Contacts:</div>
+          <ScrollPanel header="Contacts" style={{width: '100%', height: '250px'}}>
+            {this.state.registrations.map(reg => {
+              return (
+          <ul>
               <li>
                 <button className="p-link">
                   <img
@@ -157,45 +178,15 @@ export class Dashboard extends Component {
                     width="35"
                     alt="avatar1"
                   />
-                  <span className="name">Claire Williams</span>
-                  <span className="email">clare@pf-sigma.com</span>
+                  <span className="name">{reg.full_name}</span>
+              <span className="email">{reg.mobile}</span>
                 </button>
               </li>
-              <li>
-                <button className="p-link">
-                  <img
-                    src="assets/layout/images/avatar_2.png"
-                    width="35"
-                    alt="avatar2"
-                  />
-                  <span className="name">Jason Dourne</span>
-                  <span className="email">jason@pf-sigma.com</span>
-                </button>
-              </li>
-              <li>
-                <button className="p-link">
-                  <img
-                    src="assets/layout/images/avatar_3.png"
-                    width="35"
-                    alt="avatar3"
-                  />
-                  <span className="name">Jane Davidson</span>
-                  <span className="email">jane@pf-sigma.com</span>
-                </button>
-              </li>
-              <li>
-                <button className="p-link">
-                  <img
-                    src="assets/layout/images/avatar_4.png"
-                    width="35"
-                    alt="avatar4"
-                  />
-                  <span className="name">Tony Corleone</span>
-                  <span className="email">tony@pf-sigma.com</span>
-                </button>
-              </li>
-            </ul>
-          </Panel>
+          </ul>
+              )
+            })
+          }
+          </ScrollPanel>
         </div>
 
         <div className="p-col-12 p-lg-6">
